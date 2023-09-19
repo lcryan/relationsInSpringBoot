@@ -3,9 +3,10 @@ package com.example.les11model.model;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.Set;
 
 @Entity
-@Table(name="teachers")
+@Table(name = "teachers")
 public class Teacher {
     @Id
     @GeneratedValue
@@ -16,7 +17,8 @@ public class Teacher {
     @Column(name = "last_name", length = 128)
     private String lastName;
     private LocalDate dob;
-
+    @ManyToMany(mappedBy = "teachers")
+    private Set<Course> courses;
     private int salary;
 
     public Long getId() {
@@ -57,5 +59,13 @@ public class Teacher {
 
     public void setSalary(int salary) {
         this.salary = salary;
+    }
+
+    public Set<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(Set<Course> courses) {
+        this.courses = courses;
     }
 }
